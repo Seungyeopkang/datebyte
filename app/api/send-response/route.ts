@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,  // Use SSL
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_APP_PASSWORD
-  }
-})
+export const dynamic = 'force-dynamic'
 
 export async function POST(request: Request) {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_APP_PASSWORD) {
@@ -18,6 +10,16 @@ export async function POST(request: Request) {
   }
 
   try {
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_APP_PASSWORD,
+      },
+    })
+
     const data = await request.json()
     
     await transporter.sendMail({
