@@ -15,7 +15,7 @@ export default function FloatingOrbs() {
           style={{ left: `${left}%` }}
           className="absolute bottom-0"
         >
-          <div className={`w-36 h-36 rounded-full bg-gradient-to-tr from-pink-50 to-rose-50 opacity-70 blur-xl`} />
+          <div className={`w-36 h-36 rounded-full bg-gradient-to-tr from-sky-100 to-blue-100 opacity-70 blur-xl`} />
         </motion.div>
       ))}
     </div>

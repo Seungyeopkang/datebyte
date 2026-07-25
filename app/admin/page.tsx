@@ -38,7 +38,7 @@ export default function AdminPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Date Responses</h1>
+      <h1 className="text-2xl font-bold mb-4">데이트 신청 응답 목록</h1>
       
       <div className="mb-8">
         <input
@@ -49,25 +49,25 @@ export default function AdminPage() {
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
             file:text-sm file:font-semibold
-            file:bg-pink-50 file:text-pink-700
-            hover:file:bg-pink-100"
+            file:bg-sky-50 file:text-sky-700
+            hover:file:bg-sky-100"
         />
       </div>
 
       {responses.length === 0 ? (
-        <p>Upload a response JSON file to view it!</p>
+        <p>응답 JSON 파일을 업로드하여 내용을 확인해 보세요!</p>
       ) : (
         responses.map((response) => (
           <div key={response.timestamp} className="mb-8 p-4 border rounded bg-white shadow-lg">
             <p className="text-lg font-semibold mb-2">
-              Response Time: {new Date(response.timestamp).toLocaleString()}
+              응답 시간: {new Date(response.timestamp).toLocaleString('ko-KR')}
             </p>
             <div className="space-y-2 text-left">
-              <p>Date: {response.data.date ? new Date(response.data.date).toLocaleDateString() : 'Not selected'}</p>
-              <p>Time: {response.data.time || 'Not selected'}</p>
-              <p>Food Choices: {response.data.food.join(', ') || 'Not selected'}</p>
-              <p>Movie: {response.data.movie || 'Not selected'}</p>
-              <p>Excitement Level: {response.data.excitement}/100</p>
+              <p>날짜: {response.data.date ? new Date(response.data.date).toLocaleDateString('ko-KR') : '선택 안 됨'}</p>
+              <p>시간: {response.data.time || '선택 안 됨'}</p>
+              <p>음식 선택: {response.data.food.join(', ') || '선택 안 됨'}</p>
+              <p>영화: {response.data.movie || '선택 안 됨'}</p>
+              <p>기대 지수: {response.data.excitement}/100</p>
             </div>
           </div>
         ))

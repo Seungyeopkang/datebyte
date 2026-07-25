@@ -23,14 +23,14 @@ export default function StepCard({ stepNumber, totalSteps, children }: StepCardP
       {/* Progress Bar */}
       <div className="mb-6 w-full">
         <div className="flex justify-between mb-2">
-          <span className="text-sm font-semibold text-pink-600">
-            Step {stepNumber} of {totalSteps}
+          <span className="text-sm font-semibold text-sky-600">
+            {totalSteps}단계 중 {stepNumber}단계
           </span>
-          <span className="text-sm font-semibold text-pink-600">{progress.toFixed(0)}%</span>
+          <span className="text-sm font-semibold text-sky-600">{progress.toFixed(0)}%</span>
         </div>
-        <div className="w-full bg-pink-100 rounded-full h-2 overflow-hidden">
+        <div className="w-full bg-sky-100 rounded-full h-2 overflow-hidden">
           <motion.div
-            className="bg-gradient-to-r from-pink-500 to-rose-500 h-full"
+            className="bg-gradient-to-r from-sky-500 to-blue-600 h-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.6, ease: "easeOut" }}

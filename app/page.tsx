@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Heart, Coffee, Film, Utensils, Clock } from "lucide-react";
+import { Heart, Coffee, Film, Utensils, Clock, Gamepad2, BookOpen, KeyRound, PenTool } from "lucide-react";
 import confetti from "canvas-confetti";
 import ThemedCard from "@/components/ThemedCard";
 import Sparkles from "@/components/Sparkles";
@@ -62,12 +62,16 @@ export default function EnchantingDateProposalApp() {
     excitement: 50,
   });
 
-  const [hour, setHour] = useState<string>("7");
-  const [minute, setMinute] = useState<string>("00");
-  const [ampm, setAmpm] = useState<string>("PM");
+  const [hour, setHour] = useState<string>("");
+  const [minute, setMinute] = useState<string>("");
+  const [ampm, setAmpm] = useState<string>("");
 
   useEffect(() => {
-    setAnswers((prev) => ({ ...prev, time: `${hour}:${minute} ${ampm}` }));
+    if (hour && minute && ampm) {
+      setAnswers((prev) => ({ ...prev, time: `${ampm === 'AM' ? '오전' : '오후'} ${hour}:${minute}` }));
+    } else {
+      setAnswers((prev) => ({ ...prev, time: "" }));
+    }
   }, [hour, minute, ampm]);
 
   const handleAnswer = (key: keyof Answers, value: Answers[keyof Answers]) => {
@@ -86,7 +90,7 @@ export default function EnchantingDateProposalApp() {
   const formatDate = (d: Date | null) => {
     if (!d) return "";
     try {
-      return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      return d.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
     } catch (e) {
       return d.toDateString();
     }
@@ -95,8 +99,11 @@ export default function EnchantingDateProposalApp() {
   const steps = [
     
     <motion.div key="step0" className="text-center" {...fadeInUp}>
-      <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500">
-        Will you go on a date with me?
+      <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          저랑 데이트 하실래요?
+        </span>{" "}
+        💻💘
       </h1>
       <motion.img
         initial={{ opacity: 0, scale: 0.8 }}
@@ -112,26 +119,26 @@ export default function EnchantingDateProposalApp() {
             handleAnswer("isAvailable", true);
             triggerConfetti();
           }}
-          className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105"
+          className="bg-gradient-to-r from-sky-500 to-blue-600 hover:brightness-95 text-white font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md"
         >
-          Yes, I&apos;d love to!
+          좋아요, 당연히 갈래요! ✨
         </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button
               variant="outline"
-              className="border-pink-300 text-pink-500 hover:bg-pink-100 font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105"
+              className="border-sky-300 text-sky-600 hover:bg-sky-100 font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105"
             >
-              No
+              싫어요
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-pink-50 border-2 border-pink-300">
+          <DialogContent className="bg-sky-50 border-2 border-sky-300">
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-pink-600">
-                There is no &quot;NOOOOOO&quot;
+              <DialogTitle className="text-2xl font-bold text-sky-700">
+                안 돼요, &quot;싫어요&quot;는 없어요! 😆
               </DialogTitle>
-              <DialogDescription className="text-lg text-pink-500">
-                You must come with me!
+              <DialogDescription className="text-lg text-sky-600">
+                무조건 저와 함께 가셔야 해요!
               </DialogDescription>
             </DialogHeader>
             <motion.img
@@ -147,9 +154,9 @@ export default function EnchantingDateProposalApp() {
                 handleAnswer("isAvailable", true);
                 triggerConfetti();
               }}
-              className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105"
+              className="bg-gradient-to-r from-sky-500 to-blue-600 hover:brightness-95 text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105"
             >
-              Okay, I&apos;ll come!
+              알겠어요, 갈게요! 💕
             </Button>
           </DialogContent>
         </Dialog>
@@ -159,8 +166,11 @@ export default function EnchantingDateProposalApp() {
     
     <motion.div key="step1" className="text-center" {...fadeInUp}>
       <StepCard stepNumber={1} totalSteps={6}>
-      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-600">
-        YEYYYYYYYY, WHEN SHALL WE GO?
+      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-6">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          야호~! 우리 언제 만날까요?
+        </span>{" "}
+        📅
       </h2>
       <motion.img
         initial={{ opacity: 0, scale: 0.8 }}
@@ -168,7 +178,7 @@ export default function EnchantingDateProposalApp() {
         transition={{ duration: 0.5 }}
         src="https://media.tenor.com/WiQQRwR2QFAAAAAi/cute-panda.gif"
         alt="Excited bear gif"
-        className="w-full max-w-md mx-auto mb-6 rounded-2xl shadow-2xl shadow-pink-300/30"
+        className="w-full max-w-md mx-auto mb-6 rounded-2xl shadow-2xl shadow-sky-300/30"
       />
       <div className="mb-6 p-4 bg-white rounded-lg shadow-lg">
         <Calendar
@@ -178,70 +188,71 @@ export default function EnchantingDateProposalApp() {
           className="mx-auto mb-4 w-full max-w-md"
         />
         <div className="flex gap-3 justify-center mt-4">
-          <Select onValueChange={(val) => setHour(val)}>
-            <SelectTrigger className="w-24 bg-pink-50 border-pink-200 text-pink-700">
-              <SelectValue placeholder="Hour" />
+          <Select value={hour || undefined} onValueChange={(val) => setHour(val)}>
+            <SelectTrigger className="w-24 bg-sky-50 border-sky-200 text-sky-700">
+              <SelectValue placeholder="시" />
             </SelectTrigger>
             <SelectContent>
               {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
                 <SelectItem key={h} value={`${h}`}>
-                  {h}
+                  {h}시
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
 
-          <Select onValueChange={(val) => setMinute(val)}>
-            <SelectTrigger className="w-20 bg-pink-50 border-pink-200 text-pink-700">
-              <SelectValue placeholder="Min" />
+          <Select value={minute || undefined} onValueChange={(val) => setMinute(val)}>
+            <SelectTrigger className="w-20 bg-sky-50 border-sky-200 text-sky-700">
+              <SelectValue placeholder="분" />
             </SelectTrigger>
             <SelectContent>
               {['00', '15', '30', '45'].map((m) => (
                 <SelectItem key={m} value={m}>
-                  {m}
+                  {m}분
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
 
-          <Select onValueChange={(val) => setAmpm(val)}>
-            <SelectTrigger className="w-20 bg-pink-50 border-pink-200 text-pink-700">
-              <SelectValue placeholder="AM/PM" />
+          <Select value={ampm || undefined} onValueChange={(val) => setAmpm(val)}>
+            <SelectTrigger className="w-24 bg-sky-50 border-sky-200 text-sky-700">
+              <SelectValue placeholder="오전/오후" />
             </SelectTrigger>
             <SelectContent>
-              {['AM', 'PM'].map((ap) => (
-                <SelectItem key={ap} value={ap}>
-                  {ap}
-                </SelectItem>
-              ))}
+              <SelectItem value="AM">오전 (AM)</SelectItem>
+              <SelectItem value="PM">오후 (PM)</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
       <Button
         onClick={() => setStep(step + 1)}
-        disabled={!answers.date || !answers.time}
-        className="bg-gradient-to-r from-pink-500 to-rose-500 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+        disabled={!answers.date || !hour || !minute || !ampm}
+        className="bg-gradient-to-r from-sky-500 to-blue-600 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
       >
-        <Clock className="mr-2 h-5 w-5" /> Set our date!{" "}
+        <Clock className="mr-2 h-5 w-5" /> 데이트 날짜 정했어요!{" "}
         <Heart className="ml-2 h-5 w-5" />
       </Button>
       </StepCard>
     </motion.div>,
 
-  
+    
     <motion.div key="step2" className="text-center" {...fadeInUp}>
       <StepCard stepNumber={2} totalSteps={6}>
-      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-600">
-        What shall we feast on, my dear?
+      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-8">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          맛있는 건 뭐 먹을까요?
+        </span>{" "}
+        🍽️
       </h2>
       <div className="grid grid-cols-2 gap-4 md:gap-6 mb-8">
         {[
-          { name: "Lasagna", icon: <Utensils className="w-6 h-6" /> },
-          { name: "Chicken Pie", icon: <Utensils className="w-6 h-6" /> },
-          { name: "Chicken Shawarma", icon: <Utensils className="w-6 h-6" /> },
-          { name: "Snack Platter", icon: <Coffee className="w-6 h-6" /> },
-          { name: "Mix rice", icon: <Utensils className="w-6 h-6" /> },
+          { name: "한식 🍲", icon: <Utensils className="w-6 h-6" /> },
+          { name: "양식 🍝", icon: <Utensils className="w-6 h-6" /> },
+          { name: "일식 🍣", icon: <Utensils className="w-6 h-6" /> },
+          { name: "중식 🥟", icon: <Utensils className="w-6 h-6" /> },
+          { name: "아시안 🍜", icon: <Utensils className="w-6 h-6" /> },
+          { name: "디저트 & 카페 ☕", icon: <Coffee className="w-6 h-6" /> },
         ].map(({ name, icon }) => (
           <SelectButton
             key={name}
@@ -260,60 +271,68 @@ export default function EnchantingDateProposalApp() {
       <Button
         onClick={() => setStep(step + 1)}
         disabled={answers.food.length === 0}
-        className="bg-gradient-to-r from-pink-500 to-rose-500 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+        className="bg-gradient-to-r from-sky-500 to-blue-600 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
       >
-        Looks delicious! 🍽️
+        다 너무 맛있겠어요! 🍽️
       </Button>
       </StepCard>
     </motion.div>,
 
      
     <motion.div key="step3" className="text-center" {...fadeInUp}>
-      <h2 className="text-3xl font-semibold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-600">
-        What shall we watch together?
+      <StepCard stepNumber={3} totalSteps={6}>
+      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-8">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          우리 같이 뭐 하고 놀까요?
+        </span>{" "}
+        ✨
       </h2>
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-2 gap-4 md:gap-6 mb-6">
         {[
-          "The Notebook",
-          "La La Land",
-          "Titanic",
-          "Pride and Prejudice",
-          "Anyone But You",
-          "Past Lives",
-          "Love at First Sight",
-          "Through My Window 3",
-          "Something else",
-        ].map((movie) => (
+          { name: "영화 관람", icon: <Film className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+          { name: "보드게임", icon: <Gamepad2 className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+          { name: "예쁜 카페", icon: <Coffee className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+          { name: "방탈출", icon: <KeyRound className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+          { name: "만화카페", icon: <BookOpen className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+          { name: "기타 (직접 입력)", icon: <PenTool className="mx-auto mb-2 text-sky-600 w-7 h-7" /> },
+        ].map(({ name, icon }) => (
           <motion.button
-            key={movie}
+            key={name}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-pink-600 hover:bg-pink-100 font-bold py-4 px-6 rounded-lg shadow-md transition-colors duration-300"
+            className="bg-white text-sky-700 hover:bg-sky-100 border border-sky-100 font-bold py-5 px-6 rounded-xl shadow-md transition-colors duration-300 flex flex-col items-center justify-center"
             onClick={() => {
-              if (movie === "Something else") {
-                const customMovie = prompt(
-                  "What movie would you like to watch?"
-                );
-                if (customMovie) handleAnswer("movie", customMovie);
+              if (name === "기타 (직접 입력)") {
+                let customActivity = prompt("원하시는 데이트 활동을 입력해 주세요!");
+                while (customActivity !== null && customActivity.trim() === "") {
+                  customActivity = prompt("내용을 입력해 주셔야 다음으로 넘어가실 수 있어요! 원하시는 활동을 입력해 주세요:");
+                }
+                if (customActivity && customActivity.trim() !== "") {
+                  handleAnswer("movie", customActivity.trim());
+                }
               } else {
-                handleAnswer("movie", movie);
+                handleAnswer("movie", name);
               }
             }}
           >
-            <Film className="mx-auto mb-2" />
-            {movie}
+            {icon}
+            {name}
           </motion.button>
         ))}
       </div>
+      </StepCard>
     </motion.div>,
 
     
     <motion.div key="step4" className="text-center" {...fadeInUp}>
       <StepCard stepNumber={4} totalSteps={6}>
-      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-pink-600">
-        How excited are you for our date?
+      <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-8">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          우리 데이트 얼마나 기대되시나요?
+        </span>{" "}
+        🤩
       </h2>
-      <div className="max-w-lg mx-auto mb-8 p-8 bg-gradient-to-b from-white/80 to-pink-50/60 rounded-2xl shadow-lg border border-pink-100">
+      <div className="max-w-lg mx-auto mb-8 p-8 bg-gradient-to-b from-white/80 to-sky-50/60 rounded-2xl shadow-lg border border-sky-100">
         <Slider
           defaultValue={[50]}
           max={100}
@@ -322,27 +341,27 @@ export default function EnchantingDateProposalApp() {
             setAnswers({ ...answers, excitement: value[0] })
           }
         />
-        <div className="flex justify-between mt-6 text-sm text-pink-600 font-semibold">
-          <span>😐 Can&apos;t wait!</span>
-          <span>🤩 Super duper excited!</span>
+        <div className="flex justify-between mt-6 text-sm text-sky-600 font-semibold">
+          <span>😐 얼른 가고 싶어요!</span>
+          <span>🤩 완전 완전 기대돼요!!</span>
         </div>
       </div>
       <motion.div
-        className="text-4xl font-playfair font-bold text-pink-600 mb-8"
+        className="text-4xl font-playfair font-bold text-sky-700 mb-8"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
-        Excitement level: <span className="text-rose-500">{answers.excitement}%</span>
+        기대 지수: <span className="text-blue-600">{answers.excitement}%</span>
       </motion.div>
       <Button
         onClick={() => {
           setStep(step + 1);
           setTimeout(triggerConfetti, 500);
         }}
-        className="bg-gradient-to-r from-pink-500 to-rose-500 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+        className="bg-gradient-to-r from-sky-500 to-blue-600 hover:brightness-95 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
       >
-        Let&apos;s make it official! 💕
+        약속 확정하기! 💕
       </Button>
       </StepCard>
     </motion.div>,
@@ -350,20 +369,23 @@ export default function EnchantingDateProposalApp() {
      
     <motion.div key="step5" className="text-center" {...fadeInUp}>
       <StepCard stepNumber={6} totalSteps={6}>
-      <h2 className="text-5xl sm:text-6xl font-playfair font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-rose-500">
-        It&apos;s a date, my love!
+      <h2 className="text-5xl sm:text-6xl font-playfair font-bold mb-8">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600">
+          데이트 약속 완성!
+        </span>{" "}
+        ✨
       </h2>
-      <p className="text-lg text-rose-500 mb-3 font-poppins">
-        I can&apos;t wait to see you on:
+      <p className="text-lg text-sky-600 mb-3 font-poppins font-medium">
+        우리 만나는 날:
       </p>
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.4 }}
-        className="inline-block bg-gradient-to-r from-pink-100 to-rose-100 px-6 py-4 rounded-2xl border border-pink-200 mb-8"
+        className="inline-block bg-gradient-to-r from-sky-100 to-blue-100 px-6 py-4 rounded-2xl border border-sky-200 mb-8"
       >
-        <p className="text-3xl font-playfair font-bold text-pink-700">
-          {formatDate(answers.date)} at {answers.time}
+        <p className="text-3xl font-playfair font-bold text-sky-700">
+          {formatDate(answers.date)} {answers.time}
         </p>
       </motion.div>
       <motion.img
@@ -372,25 +394,25 @@ export default function EnchantingDateProposalApp() {
         transition={{ duration: 0.5 }}
         src="https://media.tenor.com/yvUCU981VYoAAAAj/mochi-cat-goma.gif"
         alt="Excited bear gif"
-        className="w-full max-w-md mx-auto mb-6 rounded-2xl shadow-2xl shadow-pink-300/30"
+        className="w-full max-w-md mx-auto mb-6 rounded-2xl shadow-2xl shadow-sky-300/30"
       />
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 0.5, type: "spring", stiffness: 260, damping: 20 }}
       >
-        <Heart className="text-red-500 w-16 h-16 mx-auto mt-6 animate-pulse" />
+        <Heart className="text-sky-500 w-16 h-16 mx-auto mt-6 animate-pulse" />
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.6 }}
-        className="mt-8 space-y-3 text-lg text-pink-600 font-poppins"
+        className="mt-8 space-y-3 text-lg text-sky-700 font-poppins"
       >
-        <p className="text-base">We&apos;ll enjoy some delicious <span className="font-semibold">{answers.food.join(", ")}</span>.</p>
-        <p className="text-base">Then we&apos;ll watch <span className="font-semibold italic">&quot;{answers.movie}&quot;</span> together.</p>
+        <p className="text-base">우리는 맛있는 <span className="font-semibold">{answers.food.join(", ")}</span>(을)를 먹고,</p>
+        <p className="text-base">그리고 함께 <span className="font-semibold italic">&quot;{answers.movie}&quot;</span>(을)를 즐길 거예요.</p>
         <p className="text-xl font-playfair font-bold mt-6">
-          Your excitement level: <span className="text-rose-600">{answers.excitement}/100</span>
+          당신의 기대 지수: <span className="text-blue-600">{answers.excitement}/100</span>
         </p>
       </motion.div>
       </StepCard>
@@ -424,7 +446,7 @@ export default function EnchantingDateProposalApp() {
   }, [step, answers, steps.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-purple-100 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 flex items-center justify-center p-6">
       <Suspense fallback={null}>
         <HeartBackground />
       </Suspense>

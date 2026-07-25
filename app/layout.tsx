@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Date Proposal App",
-  description: "A magical way to ask that special someone on a date!",
+  title: "데이트 신청 앱",
+  description: "소중한 사람에게 마음을 전하는 특별한 데이트 신청!",
 };
 
 export default function RootLayout({
@@ -24,10 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ overscrollBehaviorX: "none" }}
+        suppressHydrationWarning
       >
         {children}
       </body>

@@ -5,20 +5,20 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-pink-300 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-pink-500 to-rose-400 text-white shadow-lg hover:brightness-95",
+          "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg hover:brightness-95",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-pink-100 bg-pink-50 shadow-sm hover:brightness-95 hover:bg-pink-50/90 hover:text-pink-700",
+          "border border-sky-100 bg-sky-50 shadow-sm hover:brightness-95 hover:bg-sky-50/90 hover:text-sky-700",
         secondary:
-          "bg-rose-50 text-rose-700 shadow-sm hover:brightness-95",
+          "bg-blue-50 text-blue-700 shadow-sm hover:brightness-95",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-pink-600 underline-offset-4 hover:underline",
+        link: "text-sky-600 underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 px-6 py-2",

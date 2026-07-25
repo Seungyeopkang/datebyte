@@ -23,14 +23,17 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: '💕 New Date Response!',
+      subject: '💕 데이트 응답이 도착했습니다!',
       html: `
-        <h1>She responded!</h1>
-        <p>Date: ${new Date(data.date).toLocaleDateString()}</p>
-        <p>Time: ${data.time}</p>
-        <p>Food: ${data.food.join(', ')}</p>
-        <p>Movie: ${data.movie}</p>
-        <p>Excitement: ${data.excitement}/100</p>
+        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f0f9ff; border-radius: 10px;">
+          <h2 style="color: #0284c7;">💘 데이트 신청 응답 결과!</h2>
+          <hr style="border: 1px solid #bae6fd;" />
+          <p style="font-size: 16px;"><b>📅 만나는 날짜:</b> ${data.date ? new Date(data.date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }) : ''}</p>
+          <p style="font-size: 16px;"><b>⏰ 만나는 시간:</b> ${data.time}</p>
+          <p style="font-size: 16px;"><b>🍽️ 음식 메뉴:</b> ${Array.isArray(data.food) ? data.food.join(', ') : data.food}</p>
+          <p style="font-size: 16px;"><b>✨ 데이트 활동:</b> ${data.movie}</p>
+          <p style="font-size: 16px;"><b>🤩 기대 지수:</b> <span style="color: #2563eb; font-weight: bold;">${data.excitement} / 100</span></p>
+        </div>
       `,
       attachments: [{
         filename: `date-response-${new Date().toISOString()}.json`,

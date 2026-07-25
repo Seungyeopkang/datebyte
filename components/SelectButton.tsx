@@ -18,8 +18,8 @@ export default function SelectButton({ label, icon, isSelected, onClick }: Selec
       onClick={onClick}
       className={`p-4 rounded-xl font-semibold transition-all duration-300 flex flex-col items-center gap-2 ${
         isSelected
-          ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-300/50"
-          : "bg-white text-pink-600 border-2 border-pink-100 hover:border-pink-300"
+          ? "bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg shadow-sky-300/50"
+          : "bg-white text-sky-600 border-2 border-sky-100 hover:border-sky-300"
       }`}
     >
       <div className="text-2xl">{icon}</div>

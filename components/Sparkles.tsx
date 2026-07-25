@@ -40,7 +40,7 @@ export default function Sparkles({ count = 12 }: { count?: number }) {
         >
           <div
             style={{ width: sparkle.size, height: sparkle.size, borderRadius: 999 }}
-            className="bg-rose-200/80 blur-sm opacity-90"
+            className="bg-sky-200/90 blur-sm opacity-90"
           />
         </motion.div>
       ))}
