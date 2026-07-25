@@ -180,16 +180,16 @@ export default function EnchantingDateProposalApp() {
         alt="Excited bear gif"
         className="w-full max-w-md mx-auto mb-6 rounded-2xl shadow-2xl shadow-sky-300/30"
       />
-      <div className="mb-6 p-4 bg-white rounded-lg shadow-lg">
+      <div className="mb-6 min-w-0 p-2 sm:p-4 bg-white rounded-lg shadow-lg">
         <Calendar
           mode="single"
           selected={answers.date || undefined}
           onSelect={(date) => setAnswers({ ...answers, date: date || null })}
           className="mx-auto mb-4 w-full max-w-md"
         />
-        <div className="flex gap-3 justify-center mt-4">
+        <div className="flex w-full gap-2 sm:gap-3 justify-center mt-4">
           <Select value={hour || undefined} onValueChange={(val) => setHour(val)}>
-            <SelectTrigger className="w-24 bg-sky-50 border-sky-200 text-sky-700">
+            <SelectTrigger className="min-w-0 flex-1 bg-sky-50 border-sky-200 text-sky-700">
               <SelectValue placeholder="시" />
             </SelectTrigger>
             <SelectContent>
@@ -202,7 +202,7 @@ export default function EnchantingDateProposalApp() {
           </Select>
 
           <Select value={minute || undefined} onValueChange={(val) => setMinute(val)}>
-            <SelectTrigger className="w-20 bg-sky-50 border-sky-200 text-sky-700">
+            <SelectTrigger className="min-w-0 flex-1 bg-sky-50 border-sky-200 text-sky-700">
               <SelectValue placeholder="분" />
             </SelectTrigger>
             <SelectContent>
@@ -215,7 +215,7 @@ export default function EnchantingDateProposalApp() {
           </Select>
 
           <Select value={ampm || undefined} onValueChange={(val) => setAmpm(val)}>
-            <SelectTrigger className="w-24 bg-sky-50 border-sky-200 text-sky-700">
+            <SelectTrigger className="min-w-0 flex-[1.25] bg-sky-50 border-sky-200 text-sky-700">
               <SelectValue placeholder="오전/오후" />
             </SelectTrigger>
             <SelectContent>
@@ -446,11 +446,11 @@ export default function EnchantingDateProposalApp() {
   }, [step, answers, steps.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 flex items-center justify-center p-6">
+    <div className="min-h-screen overflow-x-hidden bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 flex items-center justify-center p-3 sm:p-6">
       <Suspense fallback={null}>
         <HeartBackground />
       </Suspense>
-      <div className="relative w-full max-w-3xl">
+      <div className="relative w-full min-w-0 max-w-3xl">
         <FloatingOrbs />
         <ThemedCard>
           <Sparkles count={18} />

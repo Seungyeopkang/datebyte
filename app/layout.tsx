@@ -14,8 +14,26 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "데이트 신청 앱",
-  description: "소중한 사람에게 마음을 전하는 특별한 데이트 신청!",
+  title: "\u200B",
+  description: "\u200B",
+  openGraph: {
+    title: "\u200B",
+    description: "\u200B",
+    images: [],
+  },
+  twitter: {
+    card: "summary",
+    title: "\u200B",
+    description: "\u200B",
+    images: [],
+  },
+  robots: {
+    index: false,
+    follow: false,
+    noarchive: true,
+    nosnippet: true,
+    noimageindex: true,
+  },
 };
 
 export default function RootLayout({

@@ -12,7 +12,7 @@ export default function ThemedCard({ children }: Props) {
       initial={{ scale: 0.98, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className="relative w-full bg-gradient-to-b from-white/95 to-sky-50/80 border border-sky-100 rounded-3xl shadow-2xl p-6 md:p-10"
+      className="relative w-full min-w-0 overflow-hidden bg-gradient-to-b from-white/95 to-sky-50/80 border border-sky-100 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-10"
     >
       <div className="absolute -top-8 left-6 right-6 flex justify-between items-center pointer-events-none">
         <div className="h-2 bg-gradient-to-r from-sky-200 to-blue-200 rounded-full w-1/3 opacity-60" />

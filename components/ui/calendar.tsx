@@ -18,10 +18,10 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-6 bg-gradient-to-b from-white/50 to-sky-50/30 rounded-2xl backdrop-blur-sm", className)}
+      className={cn("w-full p-2 sm:p-6 bg-gradient-to-b from-white/50 to-sky-50/30 rounded-2xl backdrop-blur-sm", className)}
       classNames={{
         months: "flex flex-col sm:flex-row justify-center gap-8",
-        month: "space-y-4",
+        month: "w-full space-y-4",
         caption: "flex justify-center pt-1 relative items-center mb-6",
         caption_label: "text-lg font-playfair font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-blue-600",
         nav: "space-x-2 flex items-center",
@@ -31,16 +31,17 @@ function Calendar({
         ),
         nav_button_previous: "absolute left-0",
         nav_button_next: "absolute right-0",
-        table: "w-full border-collapse space-y-2",
-        head_row: "flex gap-2",
-        head_cell: "text-sky-600 font-playfair rounded-md w-9 font-semibold text-xs tracking-wide",
-        row: "flex w-full gap-2",
+        table: "w-full table-fixed border-collapse",
+        head_row: "grid grid-cols-7",
+        head_cell: "text-sky-600 font-playfair rounded-md w-full font-semibold text-xs tracking-wide",
+        tbody: "block w-full",
+        row: "grid w-full grid-cols-7",
         cell: cn(
-          "relative p-0 text-center text-sm [&:has([aria-selected])]:rounded-xl"
+          "relative min-w-0 p-0 text-center text-sm [&:has([aria-selected])]:rounded-xl"
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          "h-9 w-9 p-0 font-medium text-sky-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-150"
+          "mx-auto h-9 w-full max-w-9 p-0 font-medium text-sky-700 hover:bg-sky-100 hover:text-sky-800 transition-all duration-150"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
