@@ -91,7 +91,7 @@ export default function EnchantingDateProposalApp() {
     if (!d) return "";
     try {
       return d.toLocaleDateString('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' });
-    } catch (e) {
+    } catch {
       return d.toDateString();
     }
   };
